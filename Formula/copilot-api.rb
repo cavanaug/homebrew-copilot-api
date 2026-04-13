@@ -19,9 +19,10 @@ class CopilotApi < Formula
     system "bun", "install", "--frozen-lockfile"
     system "bun", "run", "build"
 
+    # tsdown code-splits but does not bundle node_modules — runtime needs them.
     # pages/ must be a sibling of dist/ under libexec — server.ts resolves
     # pages/index.html via new URL("../pages/index.html", import.meta.url)
-    libexec.install "dist", "pages"
+    libexec.install "dist", "pages", "node_modules"
 
     (bin/"copilot-api").write <<~EOS
       #!/bin/bash
