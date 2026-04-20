@@ -4,8 +4,8 @@
 class CopilotApi < Formula
   desc "Turn GitHub Copilot into an OpenAI/Anthropic-compatible API server"
   homepage "https://github.com/caozhiyuan/copilot-api"
-  url "https://github.com/caozhiyuan/copilot-api/archive/refs/tags/v1.5.8.tar.gz"
-  sha256 "7cc9a471a217e096c27bf9e6686f7c4509a22f64103827bd9f71b05d42a41fb9"
+  url "https://github.com/caozhiyuan/copilot-api/archive/refs/tags/v1.6.5.tar.gz"
+  sha256 "4190422269d7d8dbc7d4a22ec393bf78730ac486525d77be15fe8c458c208035"
   license "MIT"
 
   livecheck do
