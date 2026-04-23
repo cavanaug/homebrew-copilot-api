@@ -48,6 +48,19 @@ class CopilotApi < Formula
     EOS
   end
 
+  def post_install
+    # Restart the user systemd service only if it is both enabled and currently running,
+    # so the new binary is picked up without affecting stopped or disabled installs.
+    if OS.linux?
+      enabled = quiet_system "systemctl", "--user", "is-enabled", "--quiet", "copilot-api"
+      active  = quiet_system "systemctl", "--user", "is-active",  "--quiet", "copilot-api"
+      if enabled && active
+        ohai "Restarting copilot-api user service..."
+        system "systemctl", "--user", "restart", "copilot-api"
+      end
+    end
+  end
+
   test do
     assert_match "copilot-api", shell_output("#{bin}/copilot-api --help 2>&1")
   end
