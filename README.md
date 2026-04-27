@@ -108,6 +108,73 @@ journalctl --user -u copilot-api -f
 
 ---
 
+## Using with AI Coding Agents
+
+`copilot-api` exposes an OpenAI/Anthropic-compatible endpoint, which makes it usable as a backend for AI coding agents like **Claude Code** and **OpenAI Codex CLI**.
+
+> For full configuration details on each tool, refer to their official documentation. The examples below cover the minimal setup needed to point them at `copilot-api`.
+
+### Claude Code
+
+- Official repo & docs: <https://github.com/anthropics/claude-code>
+
+Start `copilot-api` with Claude Code compatibility mode enabled:
+
+```bash
+copilot-api start --claude-code
+```
+
+Then launch Claude Code with the endpoint pointed at the local server:
+
+```bash
+ANTHROPIC_BASE_URL=http://localhost:4141 claude
+```
+
+### OpenAI Codex CLI
+
+- Official repo & docs: <https://developers.openai.com/codex/cli>
+
+Start `copilot-api` normally:
+
+```bash
+copilot-api start
+```
+
+**Option 1 — environment variable (one-off):**
+
+```bash
+OPENAI_BASE_URL=http://localhost:4141 OPENAI_API_KEY=copilot codex
+```
+
+**Option 2 — `~/.codex/config.toml` (persistent):**
+
+```toml
+openai_base_url = "http://localhost:4141"
+```
+
+Then set a placeholder API key so Codex doesn't reject the config:
+
+```bash
+export OPENAI_API_KEY=copilot
+codex
+```
+
+### OpenAI Codex App (Windows / macOS)
+
+- Official docs: <https://developers.openai.com/codex/app>
+
+The Codex app reads the same `~/.codex/config.toml` used by the CLI. Add the following line to that file:
+
+```toml
+openai_base_url = "http://localhost:4141"
+```
+
+When prompted to sign in, choose **API key** and enter any non-empty placeholder value (e.g. `copilot`). Restart the app after editing `config.toml`.
+
+> On Windows the config file is at `%USERPROFILE%\.codex\config.toml`.
+
+---
+
 ## Updating
 
 ### Standard update (recommended)
