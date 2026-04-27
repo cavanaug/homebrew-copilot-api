@@ -159,19 +159,39 @@ export OPENAI_API_KEY=copilot
 codex
 ```
 
+**Option 3 — `~/.codex/auth.json` (persistent, no env var needed):**
+
+```json
+{
+  "auth_mode": "apikey",
+  "OPENAI_API_KEY": "sk-dummy"
+}
+```
+
 ### OpenAI Codex App (Windows / macOS)
 
 - Official docs: <https://developers.openai.com/codex/app>
 
-The Codex app reads the same `~/.codex/config.toml` used by the CLI. Add the following line to that file:
+The Codex app reads the same `~/.codex/config.toml` and `~/.codex/auth.json` files used by the CLI. Add the following to each file:
+
+`~/.codex/config.toml`:
 
 ```toml
 openai_base_url = "http://localhost:4141"
 ```
 
-When prompted to sign in, choose **API key** and enter any non-empty placeholder value (e.g. `copilot`). Restart the app after editing `config.toml`.
+`~/.codex/auth.json`:
 
-> On Windows the config file is at `%USERPROFILE%\.codex\config.toml`.
+```json
+{
+  "auth_mode": "apikey",
+  "OPENAI_API_KEY": "sk-dummy"
+}
+```
+
+Restart the app after making these changes.
+
+> On Windows the config directory is `%USERPROFILE%\.codex\`.
 
 ---
 
